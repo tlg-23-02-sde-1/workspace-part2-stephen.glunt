@@ -52,22 +52,27 @@ public class Television {
         }
     }
 
-    public boolean equals(Television tv){
-        return (Objects.equals(getBrand(), tv.getBrand()) && (getVolume() == tv.getVolume()));
-    }
-
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object o) {
         boolean result = false;
-        if (obj instanceof Television){
-            result = equals((Television) obj);
+        if (this == o) {
+            result = true;
+        }
+
+        else if (o != null && this.getClass() == o.getClass()) {
+            Television that = (Television) o;
+            result = this.getVolume() == that.getVolume() &&
+                    Objects.equals(this.getBrand(), that.getBrand());
         }
         return result;
     }
 
-    public int hashCode(){
+    @Override
+    public int hashCode() {
         return Objects.hash(getBrand(), getVolume());
     }
+
+
 
     @Override
     public String toString() {
