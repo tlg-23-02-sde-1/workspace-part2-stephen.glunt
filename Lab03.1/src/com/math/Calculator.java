@@ -9,16 +9,30 @@
 package com.math;
 
 public class Calculator {
-  
-  public int add(int a, int b) {
-    return a + b;
-  }
-  
-  public double divide(int a, int b) {
-    return 1.0 * a / b;  // convert to double, otherwise int / int -> int, e.g., 7/3 = 2
-  }
-  
-  public boolean isEven(int x) {
-    return x % 2 == 0;
-  }
+
+//    public int add(int a, int b) {
+//        return a + b;
+//    }
+
+    public int add( int first, int ...rest){
+        for(int num : rest){
+            first += num;
+        }
+        return first;
+    }
+
+    public int subtract(int first, int ...rest){
+        for(int num : rest){
+            first -= num;
+        }
+        return first;
+    }
+
+    public double divide(int a, int b) {
+        return 1.0 * a / b;  // convert to double, otherwise int / int -> int, e.g., 7/3 = 2
+    }
+
+    public boolean isEven(int x) {
+        return x % 2 == 0;
+    }
 }
