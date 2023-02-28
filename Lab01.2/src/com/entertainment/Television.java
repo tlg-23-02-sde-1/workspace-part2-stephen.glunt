@@ -2,7 +2,7 @@ package com.entertainment;
 
 import java.util.Objects;
 
-public class Television {
+public class Television implements Comparable<Television>{
     //Static variables
     public static int MAX_VOLUME = 100;
     public static int MIN_VOLUME = 0;
@@ -82,4 +82,26 @@ public class Television {
                 ", tuner=" + getCurrentChannel() +
                 '}';
     }
+
+    @Override
+    public int compareTo(Television o) {
+        if (this.getBrand() == null && o.getBrand() == null) {
+            return 0;
+        } else if (this.getBrand() == null) {
+            return -1;
+        } else if (o.getBrand() == null) {
+            return 1;
+        } else {
+            return this.getBrand().compareTo(o.getBrand());
+        }
+
+    }
+
+
+//    @Override
+//    public int compareTo(Television o) {
+//        int result;
+//        result = this.getBrand().compareTo(o.getBrand());
+//        return result;
+//    }
 }
