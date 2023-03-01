@@ -1,5 +1,6 @@
 package com.crunch;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
@@ -15,13 +16,13 @@ class RadishColorComparator implements Comparator<Radish> {
 
     @Override
     public Comparator<Radish> reversed() {
-        return Comparator.super.reversed();
+        return Collections.reverseOrder(this);
     }
-//
-//    @Override
-//    public Comparator<Radish> thenComparing(Comparator<? super Radish> other) {
-//        return Comparator.super.thenComparing(other);
-//    }
+
+    @Override
+    public Comparator<Radish> thenComparing(Comparator<? super Radish> other) {
+        return Comparator.super.thenComparing(other);
+    }
 //
 //    @Override
 //    public <U> Comparator<Radish> thenComparing(Function<? super Radish, ? extends U> keyExtractor, Comparator<? super U> keyComparator) {

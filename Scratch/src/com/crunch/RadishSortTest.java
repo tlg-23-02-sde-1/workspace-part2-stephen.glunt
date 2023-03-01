@@ -27,6 +27,10 @@ class RadishSortTest {
         radishes.sort(new RadishColorComparator());
         dump (radishes);
 
+        System.out.println("Sort by color reversed order");
+        radishes.sort(new RadishColorComparator().reversed());
+        dump(radishes);
+
 
     }
     private static void dump(List myList){
