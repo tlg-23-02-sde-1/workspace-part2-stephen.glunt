@@ -83,25 +83,31 @@ public class Television implements Comparable<Television>{
                 '}';
     }
 
+    /**
+     * Natural order is defined by 'brand' (String) and then volume (int) when tied on brand.
+     * Since brand (String) is already Comparable, just delegate to its compareTo() method.
+     * @param other
+     * @return
+     */
     @Override
-    public int compareTo(Television o) {
-        if (this.getBrand() == null && o.getBrand() == null) {
-            return 0;
+    public int compareTo(Television other) {
+        int result;
+        if (this.getBrand() == null && other.getBrand() == null) {
+            result = 0;
         } else if (this.getBrand() == null) {
-            return -1;
-        } else if (o.getBrand() == null) {
-            return 1;
+            result = -1;
+        } else if (other.getBrand() == null) {
+            result = 1;
         } else {
-            return this.getBrand().compareTo(o.getBrand());
+            result = this.getBrand().compareTo(other.getBrand());
         }
 
+        if(result == 0){
+            //result = Integer.compare(this.getVolume(), other.getVolume());
+            result = this.getVolume() - other.getVolume();
+        }
+        return result;
     }
 
 
-//    @Override
-//    public int compareTo(Television o) {
-//        int result;
-//        result = this.getBrand().compareTo(o.getBrand());
-//        return result;
-//    }
 }
