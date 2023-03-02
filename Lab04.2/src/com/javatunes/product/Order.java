@@ -22,13 +22,9 @@ public class Order {
      * get the items from the cart and iterate over them, print each item's product code
      * get cart total and print
      */
-    public void processCart(Object reference_to_cart) {
-        ShoppingCart<Product> cart = null;
-        if(reference_to_cart instanceof ShoppingCart){
-            cart = (ShoppingCart<Product>) reference_to_cart;
-        } else {
-            return;
-        }
+    public <T extends Product> void processCart(ShoppingCart<T> cart) {
+//    public void processCart(ShoppingCart<? extends Product> cart) {
+
 
         System.out.printf("Order: %s contains the following:\n", this.getId());
         for(var item : cart.allItems()){
