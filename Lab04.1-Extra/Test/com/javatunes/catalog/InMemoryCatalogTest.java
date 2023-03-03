@@ -165,4 +165,25 @@ public class InMemoryCatalogTest {
             index++;
         }
     }
+
+    @Test
+    public void eightysMusicLessThan_shouldReturnListOf80sMusic_lessThanGivenAmount(){
+        double price = 15.;
+        Collection<MusicItem> popTitles = catalog.eightysMusicLessThan(price);
+        for(var item : popTitles){
+            assertTrue(price > item.getPrice());
+            assertTrue(item.getReleaseDate().toString().startsWith("198"));
+        }
+    }
+
+    @Test
+    public void genreMap_shouldReturnMapOfAllGenres_withAllSongsAsValues() {
+        Map<MusicCategory, Collection> genreMap = catalog.genreMap();
+        for(MusicCategory genre : MusicCategory.values()){
+            Set<MusicItem> test = new HashSet<>(genreMap.get(genre));
+            Set<MusicItem> expected = new HashSet<>(catalog.findByCategory(genre));
+
+            assertTrue(test.equals(expected));
+        }
+    }
 }
