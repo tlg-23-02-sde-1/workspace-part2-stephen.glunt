@@ -64,10 +64,8 @@ public class InMemoryCatalog implements Catalog {
     public Collection<MusicItem> findByKeyword(String keyword){
         Collection<MusicItem> result = new ArrayList<>();
         for(var item : catalogData){
-            if(item.getArtist().toLowerCase().contains(keyword.toLowerCase())){
-                result.add(item);
-            }
-            if(item.getTitle().toLowerCase().contains(keyword.toLowerCase())){
+            if(item.getArtist().toLowerCase().contains(keyword.toLowerCase()) ||
+                    item.getTitle().toLowerCase().contains(keyword.toLowerCase())){
                 result.add(item);
             }
         }
@@ -184,17 +182,22 @@ public class InMemoryCatalog implements Catalog {
 
     /**
      * TASK: find the cheapest item with the specified genre (MusicCategory).
+     * return as collection
      */
-    public MusicItem cheapestInGenre(MusicCategory genre){
+    public Collection<MusicItem> cheapestInGenre(MusicCategory genre){
         double price = 10000000.0;
-        MusicItem cheapest = null;
+        Collection<MusicItem> result = new ArrayList<>();
         for(var item : findByCategory(genre)){
             if(item.getPrice() < price){
                 price = item.getPrice();
-                cheapest = item;
             }
         }
-        return cheapest;
+        for(var item : findByCategory(genre)) {
+            if(item.getPrice() <= price){
+                result.add(item);
+            }
+        }
+        return result;
     }
 
 
@@ -202,12 +205,13 @@ public class InMemoryCatalog implements Catalog {
      * TASK: find the average price of items in the specified genre (MusicCategory).
      */
     public double avgPriceOfGenre(MusicCategory genre){
-        double avg = 0;
+        double avg = 0.;
         int count = 0;
         for(var item : findByCategory(genre)){
             avg += item.getPrice();
             count++;
         }
+        if(count == 0) return 0.0;
         return avg / count;
     }
 
@@ -248,7 +252,7 @@ public class InMemoryCatalog implements Catalog {
      * Just the titles!
      * @return
      */
-    public TreeSet<String> popTitles(){
+    public Collection<String> popTitles(){
         TreeSet<String> result = new TreeSet<>();
         for(var item : findByCategory(MusicCategory.POP)){
             result.add(item.getTitle());

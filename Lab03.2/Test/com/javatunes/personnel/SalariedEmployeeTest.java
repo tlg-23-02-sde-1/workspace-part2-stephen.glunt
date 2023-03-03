@@ -48,12 +48,12 @@ public class SalariedEmployeeTest {
     }
 
     @Test
-    public void testPay(){
+    public void pay_shouldEqualListedSalary(){
         assertEquals(50_000.0, emp1.pay(), .0001);
     }
 
     @Test
-    public void testPayTaxes() {
+    public void payTaxes_shouldEqual35PctOfPay() {
         assertEquals(15_000.0, emp1.payTaxes(), 0.001);
     }
 }
