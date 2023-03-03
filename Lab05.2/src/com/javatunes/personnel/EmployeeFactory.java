@@ -25,12 +25,19 @@ public class EmployeeFactory {
             throws IllegalArgumentException {
         // return value
         Employee emp = null;
-        if ("SE".equalsIgnoreCase(inputMap.get("type"))) {
-            emp = new SalariedEmployee(inputMap.get("name"), Date.valueOf(inputMap.get("hireDate")), Double.valueOf(inputMap.get("salary")));
-        } else if ("HE".equalsIgnoreCase(inputMap.get("type"))){
-            emp = new HourlyEmployee(inputMap.get("name"), Date.valueOf(inputMap.get("hireDate")), Double.valueOf(inputMap.get("rate")), Double.valueOf(inputMap.get("hours")));
-        } else {
+        String type = inputMap.get("type");
+        if (!"SE".equalsIgnoreCase(type) && !"HE".equalsIgnoreCase(type)) {
             throw new IllegalArgumentException(inputMap.get("type") + " is not a valid employee type.");
+        }
+        String name = inputMap.get("name");
+        Date hireDate = Date.valueOf(inputMap.get("hireDate"));
+        if ("SE".equalsIgnoreCase(inputMap.get("type"))) {
+            double salary = Double.parseDouble(inputMap.get("salary"));
+            emp = new SalariedEmployee(name, hireDate, salary);
+        } else if ("HE".equalsIgnoreCase(inputMap.get("type"))) {
+            double rate = Double.parseDouble(inputMap.get("rate"));
+            double hours = Double.parseDouble(inputMap.get("hours"));
+            emp = new HourlyEmployee(name, hireDate, rate, hours);
         }
 
         return emp;

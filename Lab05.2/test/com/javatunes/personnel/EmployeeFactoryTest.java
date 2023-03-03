@@ -2,6 +2,7 @@ package com.javatunes.personnel;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +58,12 @@ public class EmployeeFactoryTest {
         // TODO
         Employee emp = EmployeeFactory.createEmployee(seMap);
         assertTrue(emp instanceof SalariedEmployee);
+
+        assertEquals(seMap.get("name"), emp.getName());
+        assertEquals(seMap.get("hireDate"), emp.getHireDate().toString());
+        assertEquals(Date.valueOf(seMap.get("hireDate")), emp.getHireDate());
+        assertEquals(seMap.get("salary"), ((SalariedEmployee) emp).getSalary().toString());
+        assertEquals(Double.valueOf(seMap.get("salary")), ((SalariedEmployee)emp).getSalary(), .0001);
     }
 
     /**
@@ -67,6 +74,12 @@ public class EmployeeFactoryTest {
         // TODO
         Employee emp = EmployeeFactory.createEmployee(heMap);
         assertTrue(emp instanceof HourlyEmployee);
+
+        assertEquals(heMap.get("name"), emp.getName());
+        assertEquals(heMap.get("hireDate"), emp.getHireDate().toString());
+        assertEquals(heMap.get("rate"), ((HourlyEmployee) emp).getRate().toString());
+        assertEquals(heMap.get("hours"), ((HourlyEmployee) emp).getHours().toString());
+
     }
 
     /**
