@@ -50,6 +50,12 @@ public class OrderTaxTest {
      */
     @Test
     public void testTaxOnlineOrder() {
+        Order myOrder = new Order("Online", Location.ONLINE);
+        myOrder.processCart(cart1);
+        double tax = myOrder.getTax();
+        assertEquals(0., tax, 0.00001);
+        myOrder.processCart(cart2);
+        assertEquals(0., myOrder.getTax(), .0001);
 
     }
 

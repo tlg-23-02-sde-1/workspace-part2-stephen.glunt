@@ -10,6 +10,7 @@ package com.javatunes.product;
 
 import com.javatunes.billing.Location;
 import com.javatunes.billing.TaxCalculator;
+import com.javatunes.billing.TaxCalculatorFactory;
 
 import java.util.Collection;
 
@@ -31,6 +32,7 @@ public class Order {
     public Order(String id, Location location){
         this(id);
         this.location = location;
+        this.taxCalc = TaxCalculatorFactory.getTaxCalculator(location);
     }
 
     /**
