@@ -9,7 +9,11 @@ package com.javatunes.thread;
 
 public class MessagePrinterClient {
 
-  public static void main(String[] args) {
-    // TODO: create two instances of your thread subclass and start them up
-  }
+    public static void main(String[] args) {
+        // TODO: create two instances of your thread subclass and start them up
+      MessagePrinter alpha = new MessagePrinter("This is alpha", 2);
+      MessagePrinter omega = new MessagePrinter("this     is omega".toUpperCase(), 3);
+        alpha.run();
+        omega.run();
+    }
 }
